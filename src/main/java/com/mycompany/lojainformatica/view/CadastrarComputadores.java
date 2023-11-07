@@ -6,7 +6,8 @@ package com.mycompany.lojainformatica.view;
 
 import DAO.ComputadoresDAO;
 import com.mycompany.lojainformatica.domain.model.Computador;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 /**
  *
@@ -26,7 +27,7 @@ public class CadastrarComputadores extends javax.swing.JFrame {
         this.obj = objAlterar;
         
         //Passar valores do objeto para a tela
-        txtMarca.setText( String.valueOf(obj.getMarca())  );
+        txtMarca.setText( String.valueOf(obj.getMarca()));
         txtHD.setText(String.valueOf(obj.getHD()));
         txtProcessador.setText(String.valueOf(obj.getProcessador()));  
     }
@@ -60,6 +61,7 @@ public class CadastrarComputadores extends javax.swing.JFrame {
         jLabel4.setText("Processador:");
 
         txtBotao.setText("Cadastrar");
+
         txtBotao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBotaoActionPerformed(evt);
@@ -128,7 +130,7 @@ public class CadastrarComputadores extends javax.swing.JFrame {
         
         boolean retorno = ComputadoresDAO.cadastrar(novoCadastro);
 
-            if(retorno == true){
+            if(retorno){
                 JOptionPane.showMessageDialog(rootPane, "Dados inseridos com sucesso");
             }else{
                 JOptionPane.showMessageDialog(rootPane, "Falha, tente novamente!");
@@ -179,5 +181,6 @@ public class CadastrarComputadores extends javax.swing.JFrame {
     private javax.swing.JTextField txtHD;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtProcessador;
+
     // End of variables declaration//GEN-END:variables
 }

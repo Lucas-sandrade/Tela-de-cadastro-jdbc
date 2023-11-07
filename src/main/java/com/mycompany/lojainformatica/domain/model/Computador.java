@@ -11,7 +11,7 @@ package com.mycompany.lojainformatica.domain.model;
 public class Computador {
     
     private int idComputador;
-    private static String marca = "LucasSousaAndrade";
+    private String marca;
     private String HD;
     private String processador;
     
@@ -30,21 +30,21 @@ public class Computador {
          this.HD = hd;
          this.processador = processador;
     }
-     
-     public int getIdComputador() {
+
+    public int getIdComputador() {
         return idComputador;
     }
 
-    public void setIdComputador(int idcomputador) {
-        this.idComputador = idcomputador;
+    public void setIdComputador(int idComputador) {
+        this.idComputador = idComputador;
     }
-    
-    public static String getMarca() {
+
+    public String getMarca() {
         return marca;
     }
-    
-     public static void setMarca(String aMarca) {
-        marca = aMarca;
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getHD() {
@@ -54,7 +54,7 @@ public class Computador {
     public void setHD(String HD) {
         this.HD = HD;
     }
-    
+
     public String getProcessador() {
         return processador;
     }
@@ -62,5 +62,4 @@ public class Computador {
     public void setProcessador(String processador) {
         this.processador = processador;
     }
-
 }

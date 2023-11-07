@@ -153,19 +153,18 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
-        if(txtCampoProcessador.getText().trim().equals("")){
+
+        if(txtCampoProcessador.getText().trim().isEmpty()){
             atualizarTabela();
-        }else
-        {
+        }else {
             String processador = txtCampoProcessador.getText();
-            
+
             //Chamar a DAO para pesquisar na tabela notafiscal pelo numeroNota
             ArrayList<Computador> produtos = ComputadoresDAO.buscarPorProcessador(processador);
-            
+
             DefaultTableModel modelo = (DefaultTableModel) Table.getModel();
             modelo.setRowCount(0);
-            
+
             for (Computador produto : produtos) {
                 modelo.addRow(new String[]{
                         String.valueOf(produto.getIdComputador()),
@@ -173,39 +172,39 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
                         String.valueOf(produto.getHD()),
                         String.valueOf(produto.getProcessador())
                 });
-                
+
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        
+
         CadastrarComputadores novaJanela = new CadastrarComputadores(); //Deixa a tela cadastro visivel para add mais um computador
         novaJanela.setVisible(true);
-        
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        
+
         //1º Passo = Resgatar a linha e mandar para um objeto
         int linhaSelecionada = Table.getSelectedRow();
-        
+
         //2º acessar a camada Model da tabela
         DefaultTableModel modelo = (DefaultTableModel) Table.getModel();
-        
+
         //3º resgatar valores da linha selecionada
-        
-        
+
+        int id = (int) modelo.getValueAt(linhaSelecionada, 0);
         String marcaSelecionado = modelo.getValueAt(linhaSelecionada, 1).toString() ;
-        
+
         String hdSelecionado =  modelo.getValueAt(linhaSelecionada, 2).toString() ;
-        
+
         String processadorSelecionado =  modelo.getValueAt(linhaSelecionada, 3).toString() ;
-        
+
         //4º Passar dados para o objeto
-        Computador objAlterar = 
-        new Computador(marcaSelecionado,hdSelecionado, processadorSelecionado);
-        
+        Computador objAlterar =
+        new Computador(id, marcaSelecionado,hdSelecionado, processadorSelecionado);
+
         //5º Passar o objeto para a tela de alteração
         CadastrarComputadores novaJanela = new CadastrarComputadores(objAlterar); //Deixa a tela cadastro visivel para add mais um computador
         novaJanela.setVisible(true);
@@ -214,38 +213,38 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         //1º Passo = Resgatar a linha e mandar para um objeto
         int linhaSelecionada = Table.getSelectedRow();
-        
+
         //2º acessar a camada Model da tabela
         DefaultTableModel modelo = (DefaultTableModel) Table.getModel();
-        
+
         //3º resgatar valores da linha selecionada
         int idSelecionado = Integer.parseInt(
                             modelo.getValueAt(linhaSelecionada, 0).toString());
-        
+
         //4º Passo - Mandar o ID para a DAO excluir
         boolean retorno = ComputadoresDAO.excluir(idSelecionado);
-        
+
         if(retorno){
             JOptionPane.showMessageDialog(rootPane, "Sucesso!");
         }else{
             JOptionPane.showMessageDialog(rootPane, "Falha!");
         }
-        
+
         //Método para atualizar a tabela
         atualizarTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     public void atualizarTabela(){
-    
+
         //Chamar a DAO para consultar notas do banco
         ArrayList<Computador> listaRetorno = ComputadoresDAO.listar();
-        
+
         //Para cada item na lista, vou adicionar à tabela
-        
+
         if (listaRetorno != null) {
         DefaultTableModel modelo = (DefaultTableModel) Table.getModel();
         modelo.setRowCount(0);
-        
+
         for (Computador item : listaRetorno) {
             modelo.addRow(new String[]{
                 String.valueOf(item.getIdComputador()),
@@ -253,15 +252,15 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
                 String.valueOf(item.getHD()),
                 String.valueOf(item.getProcessador())
             });
-            
+
         }
-            
+
     }else{
             System.out.println("erro");
         }
-    
+
     };
-    
+
     /**
      * @param args the command line arguments
      */
@@ -269,7 +268,7 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
