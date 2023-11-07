@@ -194,7 +194,8 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
 
         //3º resgatar valores da linha selecionada
 
-        int id = (int) modelo.getValueAt(linhaSelecionada, 0);
+        int id = Integer.parseInt(String.valueOf(modelo.getValueAt(linhaSelecionada, 0).toString()));
+
         String marcaSelecionado = modelo.getValueAt(linhaSelecionada, 1).toString() ;
 
         String hdSelecionado =  modelo.getValueAt(linhaSelecionada, 2).toString() ;
@@ -256,7 +257,7 @@ public class ConsultaLojainformatica extends javax.swing.JFrame {
         }
 
     }else{
-            System.out.println("erro");
+            JOptionPane.showMessageDialog(this, "Não foi encontrado nenhum registro");
         }
 
     };

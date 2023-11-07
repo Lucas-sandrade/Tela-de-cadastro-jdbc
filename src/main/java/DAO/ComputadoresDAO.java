@@ -89,8 +89,6 @@ public class ComputadoresDAO {
             if (rs != null) {
 
                 while (rs.next()) {
-                    System.out.println("AQUI NA BUSCA");
-
                     int id = rs.getInt("ID_COMPUTADOR");
                     String marca = rs.getString("MARCA");
                     String hd = rs.getString("HD");
@@ -168,7 +166,7 @@ public class ComputadoresDAO {
         return lista;
     }
 
-    public static boolean alterar(Computador obj) {
+    public static boolean alterar(int id, Computador obj) {
 
         boolean retorno = false;
         Connection conexao = null;
@@ -184,9 +182,10 @@ public class ComputadoresDAO {
                     conexao.prepareStatement("UPDATE computadores SET MARCA = ?, HD = ?, PROCESSADOR = ? WHERE ID_COMPUTADOR = ?");
 
 
-            comandoSQL.setString(2, obj.getMarca());
-            comandoSQL.setString(3, obj.getHD());
-            comandoSQL.setString(4, obj.getProcessador());
+            comandoSQL.setString(1, obj.getMarca());
+            comandoSQL.setString(2, obj.getHD());
+            comandoSQL.setString(3, obj.getProcessador());
+            comandoSQL.setInt(4, id);
 
 
             //Passo 4 - Executar o comando
